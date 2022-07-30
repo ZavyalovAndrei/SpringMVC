@@ -4,12 +4,14 @@ import com.zavialov.model.Post;
 import com.zavialov.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
-  private final PostService service;
+  protected final PostService service;
 
   public PostController(PostService service) {
     this.service = service;
@@ -31,7 +33,7 @@ public class PostController {
   }
 
   @DeleteMapping("/{id}")
-  public void removeById(long id) {
-    service.removeById(id);
+  public String removeById(@PathVariable long id) {
+    return service.removeById(id);
   }
 }
